@@ -1,0 +1,87 @@
+{% extends 'common.html' %}
+{% load static %}
+
+{% block main_content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.product_name }}" class="img-fluid">
+                {% else %}
+                    <img src="" alt="{{ product.product_name }}" class="img-fluid">
+                {% endif %}
+                    
+            </div>
+            <div class="col-md-6 mt-5"> 
+                <h3>{{ product.product_name }}</h3>
+                <p>Category: {{ product.category }}</p>
+                <p>Price: #{{ product.price }}</p>
+                <p>Quantity: {{ product.quantity }}</p>
+                <button class="btn btn-secondary">Add to cart</button>
+
+                <!-- Button trigger modal for edit-->
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_edit">Edit</button>
+
+                <!-- Button trigger modal for delete-->
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Delete</button>
+
+                
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete {{ product.product_name }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this product?
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <a  class="btn btn-primary" href="{% url 'delete-product' product.id %}">Yes</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
+
+                <!--Edit Modal -->
+                <div class="modal fade" id="staticBackdrop_edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit {{ product.product_name }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form 
+                            action="{% url 'edit-product' product.id %}" 
+                            class="container border border-primary  p-3 my-3 rounded"
+                            method="post"
+                            enctype="multipart/form-data"
+                            >
+                                {% csrf_token %}
+                        
+                                <h3 class="text-center">Add Product</h3>
+                                <input type="text" placeholder="Product name" class="form-control mb-2" name="product_name" value="{{ product.product_name }}" />
+                                <label for="" class="mb-2 ps-2">Upload Image</label>
+                                <input type="file" class="form-control mb-2" name="image" value="{{ product.image }}">
+                                <input type="text" placeholder="Category" class="form-control mb-2" name="category" value="{{product.category}}">
+                                <input type="number" placeholder="Quantity" class="form-control mb-2" name="quantity" value="{{product.quantity}}">
+                                <input type="number" placeholder="Price" class="form-control mb-2" name="price" value="{{product.price}}">
+                                <button class="btn btn-primary w-100 mb-2" type="submit">Add Product</button>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock main_content %}

@@ -2,7 +2,7 @@ from django import forms
 from .models import Product
 
 class ProductForm(forms.ModelForm):
-    
+    product_name = forms.CharField(required=False, widget= forms.TextInput(attrs={'class': 'form-control'}))
     class Meta:
         model = Product
         fields = [
@@ -14,9 +14,8 @@ class ProductForm(forms.ModelForm):
         ]
         
         widgets = {
-            'product_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'category': forms.Select(attrs={'class': 'form-control'}),
-            'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
-            'price': forms.NumberInput(attrs={'class': 'form-control'}),
-            'image': forms.FileInput(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control mb-2'}),
+            'quantity': forms.NumberInput(attrs={'class': 'form-control mb-2', 'placeholder':'Quantity'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control mb-2'}),
+            'image': forms.FileInput(attrs={'class': 'form-control mb-2'}),
         }

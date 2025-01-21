@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Product
 from .forms import ProductForm
 
@@ -26,10 +27,17 @@ from .forms import ProductForm
     # else:
     #     return render(request, template_name='addProduct.html')
 
+@login_required
 def addProduct(request):
     
     if request.method == 'POST':
-        pass
+        product_form = ProductForm(request.POST, request.FILES)
+        if product_form.is_valid():
+            product_form.save()
+        else:
+            print(product_form.errors)
+        return redirect('home')
+        
     else:
         product_form = ProductForm()
         return render(request, template_name='addProduct.html', context={'product_form': product_form})

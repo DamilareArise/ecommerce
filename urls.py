@@ -26,7 +26,8 @@ from ecommerce.productApp.views import home
 urlpatterns = [
     path("admin/", admin.site.urls, name='admin'),
     path('', home, name='home'),
-    path('productApp/', include("ecommerce.productApp.urls"))
+    path('productApp/', include("ecommerce.productApp.urls")),
+    path('accounts/', include('django.contrib.auth.urls'))
 ]
 
 urlpatterns += staticfiles_urlpatterns()

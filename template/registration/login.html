@@ -1,0 +1,36 @@
+{% extends "common.html" %}
+{% load static %}
+{% block main_content %}
+    
+<form method="post" class="container border border-primary col-md-6 p-3 my-3 rounded">
+    {% csrf_token %}
+    <h3 class="text-center">Login</h3>
+    
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors  %}
+            <p  class="alert alert-danger">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+        
+
+    {% for field in form %}
+        <div class="fieldWrapper mb-2">
+            {{ field.label_tag }} {{ field }}
+            {% if field.errors %}
+                <div class="text-danger">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <button class="btn btn-primary w-100 mb-2" type="submit">Login</button>
+    <hr>
+    <div class="d-flex justify-content-between">
+        <p class="">I don't have an account? <a href="">Sign up</a></p>
+        <p><a href="{% url 'password_reset' %}">Forgot password?</a></p>
+    </div>
+    
+
+</form>
+{% endblock main_content %}

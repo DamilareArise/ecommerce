@@ -2,8 +2,13 @@
 {% extends "common.html" %}
 {% load static %}
 {% block main_content %}
-    <main class="">
-        <h1>Hello, Damilare</h1>
+    <main class="container my-3">
+        
+        {% if request.user.is_authenticated %}
+        <h3>Welcome {{request.user.first_name}} 👋</h3>
+        {% endif %}
+            
+        
         <a href="{% url "add-product" %}">click to add product</a>
     </main>
     <section class="container">

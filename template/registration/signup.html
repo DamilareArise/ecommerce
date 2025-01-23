@@ -1,0 +1,35 @@
+{% extends "common.html" %}
+{% load static %}
+{% block main_content %}
+    
+<form method="post" class="container border border-primary col-md-6 p-3 my-3 rounded">
+    {% csrf_token %}
+    {% load bootstrap %}
+    
+    <h3 class="text-center">Signup</h3>
+    
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors  %}
+            <p  class="alert alert-danger">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+        
+    <!-- {{form|bootstrap}} -->
+    {% for field in form %}
+        <div class="fieldWrapper mb-2">
+            {{ field|bootstrap }}
+            {% if field.errors %}
+                <div class="text-danger">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <button class="btn btn-primary w-100 mb-2" type="submit">Signup</button>
+    <hr>
+   
+    
+
+</form>
+{% endblock main_content %}

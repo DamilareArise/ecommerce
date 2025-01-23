@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "ecommerce.productApp",
-    "bootstrapform"
+    "bootstrapform",
+    "ecommerce.userApp"
 ]
 
 MIDDLEWARE = [

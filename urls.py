@@ -23,11 +23,13 @@ from django.views.generic.base import RedirectView
 from ecommerce.productApp.views import home
 
 
+
 urlpatterns = [
     path("admin/", admin.site.urls, name='admin'),
     path('', home, name='home'),
     path('productApp/', include("ecommerce.productApp.urls")),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('', include("ecommerce.userApp.urls"))
 ]
 
 urlpatterns += staticfiles_urlpatterns()

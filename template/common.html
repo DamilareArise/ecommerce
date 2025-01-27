@@ -29,14 +29,22 @@
                   </li>
                   
                   
-                  {% if request.user.is_authenticated %} 
-                                  
-                    <li class="nav-item">
-                      <form action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                        <button class="btn btn-primary" type="submit">Logout</button>
-                      </form>
-                    </li>
+                  {% if request.user.is_authenticated %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{ request.user.username }}
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="">Profile</a></li>
+                      <li><a class="dropdown-item" href="#">Change Password</a></li>
+                      <li class="dropdown-item">
+                        <form action="{% url 'logout' %}" method="post">
+                          {% csrf_token %}
+                          <button class="btn btn-primary" type="submit">Logout</button>
+                        </form>
+                      </li>
+                    </ul>
+                  </li>
 
                   {% else %}
                   

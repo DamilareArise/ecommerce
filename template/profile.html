@@ -7,7 +7,7 @@
         {% csrf_token %}
 
         <!-- {{product_form.as_p}} -->
-        <!-- {% for field in profile_form %}
+        {% for field in profile_form %}
             <div class="fieldWrapper">
                 {{ field.label_tag }} {{ field }}
                 {% if field.errors %}
@@ -16,7 +16,7 @@
                     </div>
                 {% endif %}
             </div>
-        {% endfor %} -->
+        {% endfor %}
         <button class="btn btn-primary w-100 mb-2" type="submit">Save</button>
 
     </form>

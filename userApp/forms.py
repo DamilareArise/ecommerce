@@ -19,31 +19,31 @@ class SignupForm(UserCreationForm):
             'password2'
         ]
         
-# class ProfileForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
 
-#     bio = forms.CharField(
-#         widget=forms.Textarea(attrs={'rows': 5, 'cols': 30, 'class': 'form-control mb-2'}), 
-#         required=False
-#         )
-#     profile_picture = forms.ImageField(
-#         required=False, 
-#         widget=forms.FileInput(attrs={'class': 'form-control mb-2'})
-#         )
-#     country = forms.ChoiceField(
-#         choices=get_countries(), 
-#         required=False, 
-#         widget=forms.Select(attrs={'class': 'form-control mb-2'})
-#         )
+    bio = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 5, 'cols': 30, 'class': 'form-control mb-2'}), 
+        required=False
+        )
+    profile_picture = forms.ImageField(
+        required=False, 
+        widget=forms.FileInput(attrs={'class': 'form-control mb-2'})
+        )
+    country = forms.ChoiceField(
+        choices=get_countries(), 
+        required=False, 
+        widget=forms.Select(attrs={'class': 'form-control mb-2'})
+        )
     
-#     class Meta:
-#         model = Profile
-#         fields = [
-#             'bio',
-#             'profile_picture',
-#             'date_of_birth',
-#             'country'
-#         ]
-#         widgets = {
-#             'gender': forms.Select(attrs={'class': 'form-control mb-2'}),
-#             'date_of_birth': forms.NumberInput(attrs={'type':'date', 'class': 'form-control mb-2'}),
-#         }
+    class Meta:
+        model = Profile
+        fields = [
+            'bio',
+            'profile_picture',
+            'date_of_birth',
+            'country'
+        ]
+        widgets = {
+            'gender': forms.Select(attrs={'class': 'form-control mb-2'}),
+            'date_of_birth': forms.NumberInput(attrs={'type':'date', 'class': 'form-control mb-2'}),
+        }

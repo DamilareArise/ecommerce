@@ -21,6 +21,7 @@ class Profile(models.Model):
     profile_picture = models.ImageField(upload_to='profilePictures/', null=True)
     gender = models.CharField(choices=gend, max_length=50, null=True),
     country = models.CharField(max_length=50, null=True)
+    date_of_birth = models.CharField(max_length=11, null=True)
     
     
     def __str__(self):

@@ -35,7 +35,7 @@
                       {{ request.user.username }}
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="{% url 'profile' request.user.id %}">Profile</a></li>
+                      <li><a class="dropdown-item" href="{% url 'view-profile' request.user.id %}">Profile</a></li>
                       <li><a class="dropdown-item" href="#">Change Password</a></li>
                       <li class="dropdown-item">
                         <form action="{% url 'logout' %}" method="post">

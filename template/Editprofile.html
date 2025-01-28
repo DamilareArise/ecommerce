@@ -7,6 +7,17 @@
         {% csrf_token %}
 
         <!-- {{product_form.as_p}} -->
+        {% for field in user_form %}
+            <div class="fieldWrapper">
+                {{ field.label_tag }} {{ field }}
+                {% if field.errors %}
+                    <div class="text-danger">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
         {% for field in profile_form %}
             <div class="fieldWrapper">
                 {{ field.label_tag }} {{ field }}

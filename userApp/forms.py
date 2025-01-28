@@ -19,6 +19,24 @@ class SignupForm(UserCreationForm):
             'password2'
         ]
         
+        
+class userForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'first_name',
+            'last_name',
+            'email'
+        ]
+        
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control mb-2'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control mb-2'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control mb-2'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control mb-2'}),
+        }
+        
 class ProfileForm(forms.ModelForm):
 
     bio = forms.CharField(

@@ -5,6 +5,7 @@ from .forms import SignupForm, ProfileForm, userForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Profile
+from django.contrib import messages
 
 
 # Create your views here.
@@ -34,11 +35,15 @@ def editProfile(request, userId):
             profile_form.save()
             user_form.save()
             
+            messages.success(request, "Profile details updated.")
+            
             return redirect('view-profile', userId=userId)
         else:
             print(profile_form.errors)
             print(user_form.errors)
             
+            messages.error(request, "Error updating profile details.")
+        
             return render(request, template_name='editProfile.html',  context={'profile_form': profile_form, 'user_form': user_form})
             
     else:

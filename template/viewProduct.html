@@ -21,11 +21,16 @@
                 <p>Quantity: {{ product.quantity }}</p>
                 <button class="btn btn-secondary">Add to cart</button>
 
-                <!-- Button trigger modal for edit-->
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_edit">Edit</button>
+                
+                {% if request.user.is_staff %}
+                    <!-- Button trigger modal for edit-->
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_edit">Edit</button>
 
-                <!-- Button trigger modal for delete-->
-                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Delete</button>
+                    <!-- Button trigger modal for delete-->
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Delete</button>
+
+                {% endif %}
+                    
 
                 
                 <!-- Modal -->

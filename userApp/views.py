@@ -22,7 +22,7 @@ def viewProfile(request, userId):
     
     return render(request, template_name='viewProfile.html', context={'user': user, 'profile': profile})
     
-    
+@login_required    
 def editProfile(request, userId):
     user = get_object_or_404(User, id=userId)
     profile = get_object_or_404(Profile, user_id=userId)

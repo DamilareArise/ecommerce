@@ -1,0 +1,62 @@
+{% extends "common.html" %}
+{% load static %}
+{% block main_content %}
+
+<div class="container">
+    <h1 class="text-center h3">All Products</h1>
+    <p class="text-center"><a href="{% url 'add-product' %}">Add product here</a></p>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            {% for product in all_product %}
+                
+                    <tr>
+                        <th scope="row">{{product.id}}</th>
+                        
+                        {% if product.image %}
+                        <td><img src="{{ product.image.url }}" alt="{{ product.product_name }}" height="40"></td>
+                        {% else %}
+                        <td><img src="" alt="{{ product.product_name }}" height="40"></td>
+                        {% endif %}
+                            
+                        <td>
+                            <a href="{% url 'view-product' product.id %}" class="text-black">{{product.product_name}}</a>
+                        </td>
+                        <td>{{product.category}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.quantity}}</td>
+                        <td>
+                            
+                            {% if product.approved %}
+                                <a href="{% url 'approve-reject-product' product.id 'reject' %}" class="btn btn-sm
+                                btn-danger"> Reject </a>
+                            {% else %}
+                                <a href="{% url 'approve-reject-product' product.id 'approve' %}" class="btn btn-sm
+                                btn-success"> approve </a>
+                            {% endif %}
+                            </a>
+                        </td>   
+                    </tr>
+ 
+            {% endfor %}
+                
+
+        </tbody>
+      </table>
+
+
+</div>
+
+{% endblock main_content %}

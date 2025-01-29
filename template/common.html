@@ -36,7 +36,12 @@
                     </a>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="{% url 'view-profile' request.user.id %}">Profile</a></li>
-                      <li><a class="dropdown-item" href="#">Change Password</a></li>
+                      
+                      {% if request.user.is_staff %}
+                      <li><a class="dropdown-item" href="{% url 'view-all-products' %}">View all product</a></li>
+                      {% endif %}
+                        
+                      <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
                       <li class="dropdown-item">
                         <form action="{% url 'logout' %}" method="post">
                           {% csrf_token %}

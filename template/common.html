@@ -38,7 +38,9 @@
                       <li><a class="dropdown-item" href="{% url 'view-profile' request.user.id %}">Profile</a></li>
                       
                       {% if request.user.is_staff %}
-                      <li><a class="dropdown-item" href="{% url 'view-all-products' %}">View all product</a></li>
+                      <li><a class="dropdown-item" href="{% url 'view-all-products' %}">View all products</a></li>
+                      <li><a class="dropdown-item" href="{% url 'view-user' 'user' %}">All users</a></li>
+                      <li><a class="dropdown-item" href="{% url 'view-user' 'staff' %}">All staffs</a></li>
                       {% endif %}
                         
                       <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>

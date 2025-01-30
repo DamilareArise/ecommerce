@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib import messages
+from ecommerce.productApp.decorators import staff_required
 
 
 # Create your views here.
@@ -50,3 +51,47 @@ def editProfile(request, userId):
         profile_form = ProfileForm(instance=profile)
         user_form = userForm(instance=user)
         return render(request, template_name='editProfile.html',  context={'profile_form': profile_form, 'user_form': user_form})
+    
+    
+@staff_required
+@login_required
+def view_user_staff(request, action):
+    if action == 'staff':
+        users = User.objects.filter(is_staff=True)
+    else:
+        users = User.objects.filter(is_staff=False)
+        
+    return render(request, template_name='viewUsers.html', context={'users': users, 'action': action})
+
+@staff_required
+@login_required
+def makeStaff(request, userId):
+    user = get_object_or_404(User, id=userId)
+    if user.is_staff:
+        user.is_staff = False
+        messages.success(request, "User is no longer a staff.")
+        
+    else:
+        user.is_staff = True
+        messages.success(request, "User is now a staff.")
+        
+    user.save()
+    
+    return redirect('view-user', action='staff')
+
+
+@staff_required
+@login_required
+def deactivateUser(request, userId):
+    user = get_object_or_404(User, id=userId)
+    if user.is_active:
+        user.is_active = False
+        messages.success(request, "User account is now deactivated.")
+        
+    else:
+        user.is_active = True
+        messages.success(request, "User account is now activated.")
+        
+    user.save()
+    
+    return redirect('view-user', action='staff')

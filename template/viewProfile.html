@@ -66,6 +66,29 @@
     <!-- Social Links -->
     <div class="mt-4 text-center">
         <a href="{% url 'edit-profile' user.id %}" class="btn btn-primary m-2">Edit</a>
+
+        <hr>
+
+        {% if request.user.is_superuser %}
+        <a href="{% url 'make-staff' user.id %}" class="btn btn-warning m-2">
+            
+            {% if user.is_staff %}
+                Undo staff
+            {% else %}
+                Make staff
+            {% endif %}
+                
+        </a>
+        <a href="{% url 'deactivate-user' user.id %}" class="btn btn-warning m-2">
+            {% if user.is_active %}
+                Deactivate account
+            {% else %}
+               Activate account
+            {% endif %}
+        </a> 
+        {% endif %}
+            
+
     </div>
 </div>
 

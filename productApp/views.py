@@ -4,6 +4,8 @@ from .models import Product
 from .forms import ProductForm
 from ecommerce.userApp.models import Profile
 from .decorators import staff_required
+from django.core.mail import send_mail
+from django.contrib import messages
 
 
 # Create your views here.
@@ -37,10 +39,38 @@ def addProduct(request):
         if product_form.is_valid():
             form = product_form.save(commit=False)
             form.addedby = addedby
-            form.save()
+            
+            try: 
+                
+                send_mail(
+                    subject= f'New Product Added by {addedby.user.first_name} {addedby.user.last_name}',
+                    message= 'Hello Admin, A new product has be added Kindly approve or decline.',
+                    from_email='admin@example.com',
+                    recipient_list=['admin@example.com'],
+                    fail_silently=False
+                )
+                
+                send_mail(
+                    subject= f'New Product Added by You',
+                    message= 'Hello, You added a new product. you will be notified once it is approved.',
+                    from_email='admin@example.com',
+                    recipient_list=[addedby.user.email],
+                    fail_silently=False
+                    
+                )
+                
+                form.save()
+                messages.success(request, 'Product Added Successfully')
+                
+                
+            except:
+                messages.error(request, 'Error sending email, hence product not added')
+                
         else:
             print(product_form.errors)
-        return redirect('home')
+            messages.error(request, 'Error adding product')
+        
+        return redirect('add-product')
         
     else:
         product_form = ProductForm()

@@ -1,7 +1,7 @@
 {% extends "common.html" %}
 {% load static %}
 {% block main_content %}
-    
+{% load bootstrap %}    
 <form method="post" class="container border border-primary col-md-6 p-3 my-3 rounded">
     {% csrf_token %}
     <h3 class="text-center">Login</h3>
@@ -15,7 +15,7 @@
 
     {% for field in form %}
         <div class="fieldWrapper mb-2">
-            {{ field.label_tag }} {{ field }}
+            {{ field|bootstrap }}
             {% if field.errors %}
                 <div class="text-danger">
                     {{ field.errors }}

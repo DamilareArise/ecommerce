@@ -29,7 +29,8 @@ urlpatterns = [
     path('', home, name='home'),
     path('productApp/', include("ecommerce.productApp.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', include("ecommerce.userApp.urls"))
+    path('', include("ecommerce.userApp.urls")),
+    path('cart/', include("ecommerce.cartApp.urls")),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

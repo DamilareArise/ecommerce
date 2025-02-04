@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "ecommerce.productApp",
     "bootstrapform",
-    "ecommerce.userApp"
+    "ecommerce.userApp",
+    "ecommerce.cartApp"
 ]
 
 MIDDLEWARE = [
@@ -68,6 +69,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "ecommerce.cartApp.context_processors.cart_length"
             ],
         },
     },
@@ -162,3 +164,9 @@ MESSAGE_TAGS = {
     message_constants.WARNING: "warning",
     message_constants.ERROR: "danger",
 }
+
+
+# settings.py
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Stores session data in DB
+SESSION_COOKIE_AGE = 86400  # Session expires in 1 day
+SESSION_SAVE_EVERY_REQUEST = True  # Save session on every request

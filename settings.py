@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     "ecommerce.productApp",
     "bootstrapform",
     "ecommerce.userApp",
-    "ecommerce.cartApp"
+    "ecommerce.cartApp",
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

@@ -26,6 +26,48 @@ def add_to_cart(request, product_id):
         messages.error(request, 'Error adding product to cart')
    
     
-    return redirect('home')
+    return redirect('view-cart')
+
+
+def reduceQuantity(request, product_id):
+    
+    cart = request.session.get('cart', {})
+    product_id_str = str(product_id)
+    
+    if product_id_str in cart and cart[product_id_str]['quantity'] > 1:
+        cart[product_id_str]['quantity'] -= 1
+        request.session['cart'] = cart
+        request.session.modified = True  # Ensure session updates
+    else:
+        del cart[product_id_str]
+        request.session['cart'] = cart
+        request.session.modified = True  # Ensure session updates
+
+    return redirect('view-cart')       
+
+
+def viewCart(request):
+    cart = request.session.get('cart', {})
+    if not cart:
+        messages.error(request, 'Your cart is empty')
+        return redirect('home')
+    else:
+        cart_items = []
+        total_price = 0.0
+        for product_id, item in cart.items():
+            product = get_object_or_404(Product, id = product_id)
+            
+            subtotal = item['quantity'] * item['price']
+            total_price += subtotal
+
+            cart_items.append({
+                'product': product,
+                'quantity': item["quantity"],
+                'price': item["price"],
+                'subtotal': subtotal
+            })
+       
+        return render(request, 'cart.html', {'cart_items': cart_items, 'total_price':total_price})
+
     
     

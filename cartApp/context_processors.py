@@ -13,5 +13,10 @@ def cart_length(request):
 #     "7": {"quantity": 2, "price": 23}
 # }
 
+# [
+#     ('2', {'quantity': 2, 'price': 23}),
+# ]
+
+# for item in cart.values():
 
 # cart.values() # dict_values([{"quantity": 2, "price": 23},{"quantity": 2, "price": 23}])

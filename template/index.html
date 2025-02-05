@@ -2,6 +2,7 @@
 {% extends "common.html" %}
 {% load static %}
 {% block main_content %}
+{% load humanize %}
     <main class="container my-3">
         
         {% if request.user.is_authenticated %}
@@ -24,7 +25,7 @@
                         
                     
                     <p>{{ product.product_name }}</p>
-                    <p>#{{product.price}}</p>
+                    <p>#{{product.price|intcomma}}</p>
                     <p><a href="{% url 'view-product' product.id %}">view more..</a></p>
                     <a href="{% url 'add-to-cart' product.id %}" class="btn btn-sm btn-secondary">add to cart</a>
                     
